@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Table</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        table {
+            border: 1px solid black;
+            width:50%;
+            border-collapse: collapse;
+        }
+        th,td{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th{
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    const users = [
+        {Name: 'dhana', age: 23, place: 'ukt'},
+        {Name: 'rani', age: 23, place: 'tvr'},
+        {Name: 'radha', age: 23, place: 'ukt'},
+    ]
+
+    // keys for heading
+    function generateTable(){
+        const headings = Object.keys(users[0]);
+        headings.unshift('SNo');
+
+        // table creation
+        const table = document.createElement('table');
+        const tr = table.insertRow(-1);
+
+        // insertion of table heading
+        headings.forEach(ele => {
+            const th = document.createElement('th');
+            th.innerText = ele;
+            tr.appendChild(th);
+        });
+
+        // insertion of table row
+        users.forEach((ele,i) => {
+            const tr = table.insertRow(-1);
+
+            // insertion of table body values
+            const values = Object.values(ele);
+            values.unshift(i+1);
+            values.forEach(value => {
+                const td = document.createElement('td');
+                td.innerHTML = value;
+                tr.appendChild(td);
+            })
+        })
+
+        const body = document.getElementsByTagName('body')[0];
+        body.appendChild(table);
+    }
+
+    generateTable();
+</script>
+</html>
