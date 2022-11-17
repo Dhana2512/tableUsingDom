@@ -11,13 +11,24 @@
             margin: 0;
         }
         table {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             width:50%;
-            border-collapse: collapse;
         }
         th,td{
             border: 1px solid #ddd;
             padding: 8px;
+        }
+        td{
+            background-color: #ddd;
+        }
+
+        button{
+            background-color: #ddd;
+            padding:8px;
+            width:100%;
+            border:none;
+            border-bottom: none;
+            text-align:left;
         }
         th{
             text-align: left;
@@ -32,9 +43,9 @@
 </body>
 <script>
     const users = [
-        {Name: 'dhana', age: 23, place: 'ukt'},
-        {Name: 'rani', age: 23, place: 'tvr'},
-        {Name: 'radha', age: 23, place: 'ukt'},
+        {Name: 'dhana', age: 23, place: 'ukt', button: 'Alert'},
+        {Name: 'rani', age: 23, place: 'tvr', button: 'Alert'},
+        {Name: 'radha', age: 23, place: 'ukt', button: 'Alert'},
     ]
 
     // keys for heading
@@ -62,9 +73,16 @@
             values.unshift(i+1);
             values.forEach(value => {
                 const td = document.createElement('td');
+                if(value === 'Alert') {
+                    const button = document.createElement('button');
+                    button.innerText = value;
+                    button.addEventListener("click", () => window.alert(`Hi ${ele.Name}`));
+                    return tr.appendChild(button);
+                }
                 td.innerHTML = value;
                 tr.appendChild(td);
             })
+            
         })
 
         const body = document.getElementsByTagName('body')[0];
